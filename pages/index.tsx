@@ -18,6 +18,7 @@ export async function getServerSideProps(context: GetServerSideProps) {
 
   let userId = 1; /* TODO: Pull user id */
 
+  /*
   let profileDrinks = await prisma.drink_records.findMany({
     where: { userId },
     include: {drink_types: true, locations: true}
@@ -28,6 +29,8 @@ export async function getServerSideProps(context: GetServerSideProps) {
     drinks.push({id: d.id, drink_type: d.drink_types, location: d.locations, date: newDate, description: d.description, image: d.image, rating: d.rating});
   });
 
+  */
+ 
   return {
     props: {
       drinks
