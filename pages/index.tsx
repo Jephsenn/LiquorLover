@@ -30,7 +30,7 @@ export async function getServerSideProps(context: GetServerSideProps) {
   });
 
   */
- 
+
   return {
     props: {
       drinks
@@ -50,7 +50,7 @@ function Home(props: Props) {
 
         <div className={styles.drink_grid}>
           
-          {props.drinks.map((d) => (
+          {/*props.drinks.map((d) => (
             <Drink
               key={d.id}
               rating={d.rating}
@@ -60,7 +60,7 @@ function Home(props: Props) {
               date={d.date}
               image={`https://www.thecocktaildb.com/images/ingredients/vodka.png`}
             />
-          ))}
+          ))*/}
         </div>
     </div>
   );
