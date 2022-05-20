@@ -21,7 +21,7 @@ model drink_records {
   locationId  Int
   rating      Int
   description String      @default("") @db.VarChar(1000)
-  image       String      @default("") @db.VarChar(100)
+  image       String?     @db.VarChar(100)
   dateCreated DateTime?   @default(now()) @db.Timestamp(0)
   drink_types drink_types @relation(fields: [drinkId], references: [id], onDelete: NoAction, map: "FK__drink_types")
   locations   locations   @relation(fields: [locationId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_drink_records_locations")

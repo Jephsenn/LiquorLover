@@ -38,13 +38,12 @@ export default function Drink(props: Props) {
               src={props.image}
               alt="Could not find image"
               layout="fill"
-              objectFit="contain"
             />
           </div>
           <p className={styles.drink_name_front}>{props.name}</p>
         </div>
         <div className={styles.card_back}>
-          <p className={styles.drink_name_front}> {props.name} </p>
+          <p className={styles.drink_name_back}> {props.name} </p>
           <div className={styles.inline_row}>
             <FontAwesomeIcon
               icon={faLocationDot}

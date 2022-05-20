@@ -1,0 +1,50 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 64px 0;
+  align-items: center;
+  height: 100%;
+  flex: 0 0 150px;
+  background-color: #002f47;
+  border-right: 2px solid #212121;
+  border-radius: 0 25% 25% 0;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  z-index: 10;
+}
+
+.nav_icon_selected {
+  width: 35px;
+  margin-top: 75px;
+  color: #fabf4e;
+}
+
+.nav_icon {
+  width: 35px;
+  margin-top: 75px;
+  color: #9a9b9d;
+}
+
+.logo {
+  position: relative;
+  width: 100px;
+  height: 110px;
+}
+
+.web_title {
+  font-size: 24px;
+  color: white;
+  position: absolute;
+  font-weight: bold;
+  top: 60px;
+  left: -10px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.placeholder, .links, .logo_container {
+  flex: 0 1 auto;
+}
