@@ -8,7 +8,44 @@ datasource db {
 }
 
 model users {
-  id       Int     @id @default(autoincrement())
-  username String? @db.VarChar(30)
-  name     String? @db.VarChar(30)
+  id            Int             @id @default(autoincrement())
+  username      String?         @db.VarChar(30)
+  name          String?         @db.VarChar(30)
+  drink_records drink_records[]
+}
+
+model drink_records {
+  id          Int         @id @default(autoincrement())
+  drinkId     Int
+  userId      Int
+  locationId  Int
+  rating      Int
+  description String      @default("") @db.VarChar(1000)
+  image       String      @default("") @db.VarChar(100)
+  dateCreated DateTime?   @default(now()) @db.Timestamp(0)
+  drink_types drink_types @relation(fields: [drinkId], references: [id], onDelete: NoAction, map: "FK__drink_types")
+  locations   locations   @relation(fields: [locationId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_drink_records_locations")
+  users       users       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_drink_records_users")
+
+  @@index([drinkId], map: "FK__drink_types")
+  @@index([locationId], map: "FK_drink_records_locations")
+  @@index([userId], map: "FK_drink_records_users")
+}
+
+model drink_types {
+  id            Int             @id @default(autoincrement())
+  name          String          @default("0") @db.VarChar(50)
+  description   String          @default("0") @db.VarChar(50)
+  image         String          @default("0") @db.VarChar(50)
+  drink_records drink_records[]
+}
+
+model locations {
+  id            Int             @id @default(autoincrement())
+  name          String          @default("0") @db.VarChar(50)
+  streetAddress String          @default("0") @db.VarChar(100)
+  zipCode       String          @default("0") @db.VarChar(10)
+  city          String          @default("0") @db.VarChar(50)
+  state         String          @default("0") @db.VarChar(2)
+  drink_records drink_records[]
 }
