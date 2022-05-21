@@ -5,6 +5,7 @@
   cursor: pointer;
   border-radius: 50%;
   perspective: 1000px;
+  flex: 0 0 250px;
 }
 
 .card_inner {
@@ -13,7 +14,7 @@
   height: 100%;
   transition: transform 0.5s;
   transform-style: preserve-3d;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background-color: #002f47;
   color: white;
   text-align: center;
@@ -88,4 +89,27 @@
 .star_empty {
   width: 30px;
   color: #9a9184;
+}
+
+@media only screen and (min-width: 992px) {
+  .card {
+    width: 175px;
+    height: 175px;
+    flex: 0 0 175px;
+  }
+
+  .drink_name_front,
+  .drink_name_back {
+    font-size: 16px;
+  }
+  .card_image {
+    width: 100px;
+  }
+  .inline_row {
+    font-size: 12px;
+  }
+  .star_empty,
+  .star_full {
+    width: 20px;
+  }
 }
