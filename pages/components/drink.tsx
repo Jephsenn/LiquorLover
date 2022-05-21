@@ -10,10 +10,10 @@ import styles from "../../styles/Drink.module.css";
 type Props = {
   name: string;
   image: string;
-  description: string;
-  location: string;
-  date: string;
-  rating: number;
+  description?: string;
+  location?: string;
+  date?: string;
+  rating?: number;
 };
 
 function Rating(stars: number) {
@@ -52,7 +52,7 @@ export default function Drink(props: Props) {
             <p> {props.location} </p>
           </div>
           <div className={styles.inline_row}>
-            {Rating(props.rating)}
+            {props.rating ? Rating(props.rating) : <div/>}
           </div>
         </div>
       </div>

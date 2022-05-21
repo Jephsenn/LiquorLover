@@ -8,11 +8,12 @@
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
+  margin-left: 32px;
 }
 
 .past_label {
   font-size: 32px;
-  font-weight: 400; 
+  font-weight: 400;
   color: #9a9b9d;
   margin-left: 32px;
 }
@@ -53,5 +54,20 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .past_drinks {
+    margin-top: 125px;
+  }
+  .past_label {
+    font-size: 24px;
+  }
+  .top_bar {
+    height: 125px;
+  }
+  .welcome_text {
+    font-size: 36px;
   }
 }

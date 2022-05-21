@@ -48,7 +48,7 @@ export async function getServerSideProps(context: GetServerSideProps) {
   };
 }
 
-function Profile(props: Props) {
+export default function Profile(props: Props) {
   return (
     <Layout page="profile">
       <div className={styles.profile}>
@@ -78,5 +78,3 @@ function Profile(props: Props) {
     </Layout>
   );
 }
-
-export default Profile;
