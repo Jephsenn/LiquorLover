@@ -35,7 +35,7 @@ export async function getServerSideProps(context: GetServerSideProps) {
       location: d.locations,
       date: newDate,
       description: d.description,
-      image: d.image,
+      image: d.image ? d.image : "",
       rating: d.rating,
     });
   });

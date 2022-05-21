@@ -31,7 +31,7 @@
 }
 
 .top_bar {
-  background-color: #fabf4e;
+  background-image: linear-gradient(#8e641d, #fabf4e);
   height: 200px;
   position: absolute;
   width: 100vw;
