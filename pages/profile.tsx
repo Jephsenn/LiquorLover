@@ -1,9 +1,9 @@
 import type { GetServerSideProps } from "next";
 import styles from "../styles/Profile.module.css";
-import Drink from "./components/drink";
+import Drink from "../src/components/drink";
 import { PrismaClient } from "@prisma/client";
 import { SDrinkRecord } from "../types/drinks";
-import Layout from "./components/layout";
+import Layout from "../src/components/layout";
 
 type Props = {
   drinks: SDrinkRecord[];
