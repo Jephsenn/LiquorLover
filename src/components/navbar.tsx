@@ -1,4 +1,5 @@
 import {
+  faChampagneGlasses,
   faGear,
   faHome,
   faPlus,
@@ -40,6 +41,16 @@ export default function Navbar(props: Props) {
             />
           </a>
         </Link>
+        <Link href="/drinks">
+          <a>
+            <FontAwesomeIcon
+              icon={faChampagneGlasses}
+              className={
+                props.page == "drinks" ? styles.nav_icon_selected : styles.nav_icon
+              }
+            />
+          </a>
+        </Link>
         <Link href="/add">
           <a>
             <FontAwesomeIcon
@@ -50,7 +61,6 @@ export default function Navbar(props: Props) {
             />
           </a>
         </Link>
-
         <Link href="/profile">
           <a>
             <FontAwesomeIcon

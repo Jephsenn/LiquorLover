@@ -21,6 +21,17 @@
   border-radius: 50%;
 }
 
+.card_inner_no_flip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background-color: #002f47;
+  color: white;
+  text-align: center;
+  border-radius: 50%;
+}
+
 .card_front,
 .card_back {
   position: absolute;
