@@ -67,6 +67,7 @@ export default function Profile(props: Props) {
                 description={d.description}
                 location={d.location.name}
                 date={d.date}
+                flippable={true}
                 image={
                   d.image ? d.image : `/images/drinks/${d.drink_type.image}.svg`
                 }

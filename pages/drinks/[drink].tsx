@@ -1,11 +1,13 @@
 import type { GetServerSideProps, GetStaticPropsContext } from "next";
-import styles from "../styles/DrinkPage.module.css";
+import styles from "../../styles/DrinkPage.module.css";
 import { drink_types, PrismaClient } from "@prisma/client";
+import Layout from "../../src/components/layout";
 
 type Props = {
-  error?: string;
-  drink?: drink_types;
+  drink: drink_types;
 };
+
+/* you can ask me to explain this part but its kinda hard (and also idk if its even right) */
 
 export async function getStaticPaths() {
   const prisma = new PrismaClient();
@@ -35,5 +37,12 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 export default function DrinkPage(props: Props) {
-  return <div>{props.drink?.name + " " + props.drink?.description}</div>;
+  return (
+    <Layout page="drinks">
+      <div className={styles.drinks}>
+        <img src={`/images/drinks/${props.drink.name.replaceAll(" ", "_")}.svg`} alt="Drink Image" />
+        <p className={styles.name}> {props.drink.name} </p>
+      </div>
+    </Layout>
+  );
 }
