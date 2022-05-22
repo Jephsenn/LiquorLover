@@ -3,13 +3,14 @@ import Layout from "./components/layout";
 import { drink_types, PrismaClient } from "@prisma/client";
 import styles from "../styles/Drinks.module.css";
 import Drink from "./components/drink";
+import { useState } from "react";
 
 type Props = {
   drinks: drink_types[];
 };
 
-function showInfo(id: number) {
-
+async function showInfo(id: number) {
+  console.log("show info working");
 }
 
 export async function getServerSideProps(context: GetServerSideProps) {
@@ -25,13 +26,15 @@ export async function getServerSideProps(context: GetServerSideProps) {
 }
 
 export default function Drinks(props: Props) {
+  const [selectedDrink, setSelectedDrink] = useState(-1);
+
   return (
     <Layout page="drinks">
       <div className={styles.drinks}>
         <div className={styles.all_drinks}>
           <div className={styles.drink_grid}>
             {props.drinks.map((d) => (
-              <div key={d.id} onClick={()=>showInfo(d.id)}>
+              <div key={d.id} onClick={() => setSelectedDrink(d.id)}>
                 <Drink
                   name={d.name}
                   description={d.description}
@@ -42,7 +45,12 @@ export default function Drinks(props: Props) {
           </div>
         </div>
         <div className={styles.locations}>
-            <p>Click on a drink to get started!</p>
+          <p>Click on a drink to get started!</p>
+          {selectedDrink == -1 ? (
+            <div>You have not clicked a drink yet...</div>
+          ) : (
+            <div>You clicked a drink! {selectedDrink}</div>
+          )}
         </div>
       </div>
     </Layout>
