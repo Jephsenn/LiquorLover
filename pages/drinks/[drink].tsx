@@ -2,6 +2,7 @@ import type { GetServerSideProps, GetStaticPropsContext } from "next";
 import styles from "../../styles/DrinkPage.module.css";
 import { drink_types, PrismaClient } from "@prisma/client";
 import Layout from "../../src/components/layout";
+import Image from "next/image";
 
 type Props = {
   drink: drink_types;
@@ -40,8 +41,8 @@ export default function DrinkPage(props: Props) {
   return (
     <Layout page="drinks">
       <div className={styles.drinks}>
-        <img src={`/images/drinks/${props.drink.name.replaceAll(" ", "_")}.svg`} alt="Drink Image" />
-        <p className={styles.name}> {props.drink.name} </p>
+        <Image src={`/images/drinks/${props.drink?.name.replaceAll(" ", "_")}.svg`} alt="Drink Image" />
+        <p className={styles.name}> {props.drink?.name} </p>
       </div>
     </Layout>
   );
