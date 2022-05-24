@@ -36,6 +36,7 @@ export default function Drinks(props: Props) {
             {props.drinks.map((d) => (
               <div key={d.id} /*onClick={() => setSelectedDrink(d.id)}*/>
                 <Drink
+                  id={d.id}
                   name={d.name}
                   description={d.description}
                   image={`/images/drinks/${d.image}.svg`}

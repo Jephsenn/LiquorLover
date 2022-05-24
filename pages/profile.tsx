@@ -61,6 +61,7 @@ export default function Profile(props: Props) {
           <div className={styles.drink_grid}>
             {props.drinks.map((d) => (
               <Drink
+                id={d.id}
                 key={d.id}
                 rating={d.rating}
                 name={d.drink_type.name}

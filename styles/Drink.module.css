@@ -6,6 +6,7 @@
   border-radius: 50%;
   perspective: 1000px;
   flex: 0 0 250px;
+
 }
 
 .card_inner {
@@ -100,6 +101,22 @@
 .star_empty {
   width: 30px;
   color: #9a9184;
+}
+
+.remove {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: red;
+}
+
+.remove_icon {
+  width: 36px;
+}
+
+.remove:hover {
+  box-shadow: 0 3px 6px rgba(255, 255, 255, 0.7), 0 3px 6px rgba(255, 255, 255, 0.83);
+  border-radius: 50%;
 }
 
 @media only screen and (min-width: 992px) {

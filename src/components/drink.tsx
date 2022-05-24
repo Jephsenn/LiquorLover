@@ -1,10 +1,13 @@
-import { faLocationDot, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faStar, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/Drink.module.css";
+import axios from "axios";
+import { useState } from "react";
 
 type Props = {
+  id: number;
   name: string;
   image: string;
   description?: string;
@@ -13,6 +16,17 @@ type Props = {
   rating?: number;
   flippable?: boolean;
 };
+
+function removeRecord(id: number){
+    axios
+      .post("/api/remove_drink", { id })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+}
 
 function Rating(stars: number) {
   return (
@@ -42,6 +56,12 @@ function Rating(stars: number) {
 }
 
 export default function Drink(props: Props) {
+
+  const [deleted, setDeleted] = useState(false)
+
+  if(deleted){
+    return (<div></div>);
+  }
   const d = (
     <div className={styles.card}>
       <div className={props.flippable ? styles.card_inner : styles.card_inner_no_flip }>
@@ -63,6 +83,16 @@ export default function Drink(props: Props) {
               <p> {props.location} </p>
             </div>
             <div className={styles.inline_row}>{Rating(props.rating!)}</div>
+            <div className={styles.remove}>
+              <FontAwesomeIcon
+                icon={faMinusCircle}
+                className={styles.remove_icon}
+                onClick={() => {
+                  removeRecord(props.id);
+                  setDeleted(true);
+                }}
+              />
+            </div>
           </div>
       
       </div>

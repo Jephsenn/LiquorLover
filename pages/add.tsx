@@ -1,10 +1,14 @@
-import { drink_types, locations } from "@prisma/client";
+import { drink_types, locations, PrismaClient } from "@prisma/client";
+import { GetServerSideProps } from "next";
 import axios from "axios";
 import { ChangeEvent, Component } from "react";
 import Layout from "../src/components/layout";
 import styles from "../styles/Add.module.css";
+import Autocomplete from "../src/components/autocomplete";
 
-type Props = {};
+type Props = {
+  drinkNames: string[];
+};
 
 type State = {
   locationText: string;
@@ -12,6 +16,23 @@ type State = {
   location?: locations;
   drink?: drink_types;
 };
+
+
+export async function getServerSideProps(context: GetServerSideProps) {
+  const prisma = new PrismaClient();
+  let drinkTypes = await prisma.drink_types.findMany();
+  let drinkNames: string[] = [];
+
+  drinkTypes.forEach((d) => {
+    drinkNames.push(d.name);
+  })
+
+  return {
+    props: {
+      drinkNames,
+    },
+  };
+}
 
 export default class Add extends Component<Props, State> {
   constructor(props: Props) {
@@ -48,20 +69,22 @@ export default class Add extends Component<Props, State> {
     return (
       <Layout page="add">
         <div className={styles.add}>
-          <input
+        {/*  <input
             type="text"
             name="locationText"
             placeholder="Location Name"
             value={locationText}
             onChange={this.onChange}
-          />
-          <input
+    />*/}
+          <Autocomplete suggestions={["Woodys", "Roofies", "Owens"]} placeholder="Location Name"/>
+          {/*<input
             type="text"
             name="drinkText"
             placeholder="Drink Name"
             value={drinkText}
             onChange={this.onChange}
-          />
+  />*/}
+          <Autocomplete suggestions={this.props.drinkNames} placeholder="Drink Name"/>
           <button onClick={this.addRecord}>Add Drink</button>
         </div>
       </Layout>
