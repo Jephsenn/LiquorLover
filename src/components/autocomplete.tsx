@@ -119,6 +119,7 @@ export default class Autocomplete extends Component<Props, State> {
       return (
         <Fragment>
           <input
+            className={styles.input}
             type="text"
             onChange={onChange}
             onKeyDown={onKeyDown}

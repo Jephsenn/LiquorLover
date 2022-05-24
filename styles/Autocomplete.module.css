@@ -3,6 +3,13 @@ color: #999;
 padding: 0.5rem;
 }
 
+.input {
+    width: calc(300px + 1rem);
+    max-height: 143px;
+    font-size: 32px;
+    margin: 1rem 0 0 0;
+}
+
 .suggestions {
 border: 1px solid #999;
 border-top-width: 0;

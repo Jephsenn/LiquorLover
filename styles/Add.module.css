@@ -1,5 +1,31 @@
 .add {
-    display: flex;
-    flex-direction: column;
-    
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.star_full {
+  margin: 0.5rem;
+  width: 50px;
+  color: #f4e285;
+}
+
+.star_empty {
+  margin: 0.5rem;
+  width: 50px;
+  color: #9a9184;
+}
+
+.star_empty:hover {
+  color: #f4e285;
+}
+
+.rating_container {
+  display: flex;
+  flex-direction: row;
+  width: calc(300px + 1rem);
+  justify-content: center;
 }

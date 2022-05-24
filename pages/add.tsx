@@ -1,3 +1,5 @@
+import { faLocationDot, faStar, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { drink_types, locations, PrismaClient } from "@prisma/client";
 import { GetServerSideProps } from "next";
 import axios from "axios";
@@ -15,6 +17,8 @@ type State = {
   drinkText: string;
   location?: locations;
   drink?: drink_types;
+  rating: number;
+  hover: number;
 };
 
 
@@ -41,6 +45,8 @@ export default class Add extends Component<Props, State> {
     this.state = {
       locationText: "",
       drinkText: "",
+      rating: 0,
+      hover: 0,
     };
   }
 
@@ -65,7 +71,7 @@ export default class Add extends Component<Props, State> {
   };
 
   render() {
-    const { locationText, drinkText } = this.state;
+    const { locationText, drinkText, rating } = this.state;
     return (
       <Layout page="add">
         <div className={styles.add}>
@@ -85,6 +91,53 @@ export default class Add extends Component<Props, State> {
             onChange={this.onChange}
   />*/}
           <Autocomplete suggestions={this.props.drinkNames} placeholder="Drink Name"/>
+          <div className={styles.rating_container}>
+            <FontAwesomeIcon
+              icon={faStar}
+              className={rating > 0 ? styles.star_full : styles.star_empty}
+              onMouseOver={() => this.setState({hover: 1})}
+              style={{
+                color: this.state.hover > 0 ? "#f4e285" : "#9a9184"
+              }}
+              onMouseOut={() => this.setState({hover: 0})}
+            />
+            <FontAwesomeIcon
+              icon={faStar}
+              className={rating > 1 ? styles.star_full : styles.star_empty}
+              onMouseOver={() => this.setState({hover: 2})}
+              style={{
+                color: this.state.hover > 1 ? "#f4e285" : "#9a9184"
+              }}
+              onMouseOut={() => this.setState({hover: 0})}
+            />
+            <FontAwesomeIcon
+              icon={faStar}
+              className={rating > 2 ? styles.star_full : styles.star_empty}
+              onMouseOver={() => this.setState({hover: 3})}
+              style={{
+                color: this.state.hover > 2 ? "#f4e285" : "#9a9184"
+              }}
+              onMouseOut={() => this.setState({hover: 0})}
+            />
+            <FontAwesomeIcon
+              icon={faStar}
+              className={rating > 3 ? styles.star_full : styles.star_empty}
+              onMouseOver={() => this.setState({hover: 4})}
+              style={{
+                color: this.state.hover > 3 ? "#f4e285" : "#9a9184"
+              }}
+              onMouseOut={() => this.setState({hover: 0})}
+            />
+            <FontAwesomeIcon
+              icon={faStar}
+              className={rating > 4 ? styles.star_full : styles.star_empty}
+              onMouseOver={() => this.setState({hover: 5})}
+              style={{
+                color: this.state.hover > 4 ? "#f4e285" : "#9a9184"
+              }}
+              onMouseOut={() => this.setState({hover: 0})}
+            />
+          </div>
           <button onClick={this.addRecord}>Add Drink</button>
         </div>
       </Layout>
