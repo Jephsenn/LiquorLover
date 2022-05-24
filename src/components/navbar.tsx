@@ -51,16 +51,6 @@ export default function Navbar(props: Props) {
             />
           </a>
         </Link>
-        <Link href="/add">
-          <a>
-            <FontAwesomeIcon
-              icon={faPlusCircle}
-              className={
-                props.page == "add" ? styles.nav_icon_selected : styles.nav_icon
-              }
-            />
-          </a>
-        </Link>
         <Link href="/profile">
           <a>
             <FontAwesomeIcon

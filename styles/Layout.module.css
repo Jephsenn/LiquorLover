@@ -5,3 +5,15 @@
   height: 100%;
   background-color: white;
 }
+
+
+.add {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}
+
+.add_icon {
+  width: 60px;
+  color: #002f47;
+}

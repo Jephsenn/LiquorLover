@@ -1,10 +1,32 @@
 .drinks {
   display: flex;
   flex-direction: column;
+  padding: 64px;
 }
 
 .name {
     font-size: 64px;
-    font-weight: bold;
+    font-weight: 400;
     color: #222222;
+}
+
+.image {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 20px;
+  color: #222222;
+  font-weight: normal;
+  padding: 32px;
+}
+
+.inline_title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
 }
