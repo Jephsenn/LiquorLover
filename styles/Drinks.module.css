@@ -7,32 +7,19 @@
 }
 
 .all_drinks {
-  margin-top: 50px;
-  margin: 0 32px;
-  border: 2px solid rgba(97, 96, 96, 0.84);
-  border-radius: 16px;
+  margin: 0 32px;  
 }
 
 .drink_grid {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   overflow: auto;
   margin: 0 3px 8px 3px;
-}
-
-.locations {
-  margin: 25px 32px 0;
-  height: 100%;
-  border: 2px solid rgba(97, 96, 96, 0.84);
-  border-radius: 16px 16px 0 0;
-  border-bottom: none;
-  
+  justify-content: center;
 }
 
 @media only screen and (min-width: 992px) {
-  .all_drinks {
-    margin-top: 25px;
-  }
   .top_bar {
     height: 100px;
   }

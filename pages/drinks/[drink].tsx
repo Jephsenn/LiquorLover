@@ -40,21 +40,8 @@ export default function DrinkPage(props: Props) {
   return (
     <Layout page="drinks">
       <div className={styles.drinks}>
-        <div className={styles.inline_title}>
-          <div className={styles.image}>
-            <Image
-              src={`/images/drinks/${props.drink?.name.replaceAll(
-                " ",
-                "_"
-              )}.svg`}
-              alt="Drink Image"
-              layout="fill"
-            />
-          </div>
-          <p className={styles.name}> {props.drink?.name} </p>
-        </div>
-
-        <p className={styles.description}>{props.drink?.description}</p>
+        <Image src={`/images/drinks/${props.drink?.name.replaceAll(" ", "_")}.svg`} alt="Drink Image" width="400px" height="400px"/>
+        <p className={styles.name}> {props.drink?.name} </p>
       </div>
     </Layout>
   );

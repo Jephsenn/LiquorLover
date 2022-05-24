@@ -15,6 +15,7 @@ export default function Layout(props: Props) {
     <div className={styles.main_container}>
       <Head>
         <title>Liquor Lover</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
         <meta name="description" content="Find your new favorite drink" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
