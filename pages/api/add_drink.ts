@@ -17,10 +17,10 @@ export default async function handler(
 ) {
   const { locationId, drinkId, rating, description } = req.body;
   const userId = 1; // TODO: Get user id from session
+
   console.log(req.body);
 
-  if (userId && locationId && userId) {
-      console.log("gets here?");
+  if (userId && locationId && drinkId) {
     await prisma.drink_records.create({
       data: { userId, locationId, drinkId, rating, description },
     });

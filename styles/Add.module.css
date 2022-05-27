@@ -7,15 +7,19 @@
   align-items: center;
 }
 
+.add_form {
+  
+}
+
 .star_full {
-  margin: 0.5rem;
-  width: 50px;
+  margin: 4px;
+  width: 40px;
   color: #f4e285;
 }
 
 .star_empty {
-  margin: 0.5rem;
-  width: 50px;
+  margin: 4px;
+  width: 40px;
   color: #9a9184;
 }
 
@@ -28,4 +32,13 @@
   flex-direction: row;
   width: calc(300px + 1rem);
   justify-content: center;
+}
+
+.add_drink {
+  padding: 16px;
+  background-color: #002f47;
+  color: white;
+  width: 100%;
+  margin: 32px 0;
+  cursor: pointer;
 }

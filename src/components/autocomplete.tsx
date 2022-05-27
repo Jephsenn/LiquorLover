@@ -1,76 +1,109 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import styles from "../../styles/Autocomplete.module.css";
 
 type Props = {
-    suggestions: string[],
-    placeholder: string
-}
+  suggestions: AutocompleteItem[];
+  placeholder: string;
+  setValue: Function;
+  type: string;
+};
 
 type State = {
-    activeSuggestion: number,
-    filteredSuggestions: string[],
-    showSuggestions: boolean,
-    userInput: string
-}
+  activeSuggestion: number;
+  filteredSuggestions: AutocompleteItem[];
+  showSuggestions: boolean;
+  userInput: string;
+};
+
+export type AutocompleteItem = {
+  name: string;
+  id: number;
+};
 
 export default class Autocomplete extends Component<Props, State> {
+  private activeRef: React.RefObject<HTMLLIElement>;
+
   constructor(props: Props) {
     super(props);
     this.state = {
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      userInput: ""
+      userInput: "",
     };
+
+    this.activeRef = React.createRef();
   }
 
-  onChange = (e:any) => {
+  onChange = (e: any) => {
     const { suggestions, placeholder } = this.props;
     const userInput = e.currentTarget.value;
 
-    const filteredSuggestions = suggestions.filter(
-      suggestion =>
-        suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
+    if (userInput) {
+      const filteredSuggestions = suggestions.filter(
+        (suggestion) =>
+          suggestion.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1
+      );
 
-    this.setState({
-      activeSuggestion: 0,
-      filteredSuggestions,
-      showSuggestions: true,
-      userInput: e.currentTarget.value
-    });
+      this.setState({
+        activeSuggestion: 0,
+        filteredSuggestions,
+        showSuggestions: true,
+        userInput: e.currentTarget.value,
+      });
+    } else {
+      this.setState({ showSuggestions: false });
+    }
   };
 
-  onClick = (e:any) => {
+  onClick = (e: any) => {
+    const { suggestions, type, setValue } = this.props;
+
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      userInput: e.currentTarget.innerText
+      userInput: e.currentTarget.innerText,
+    });
+
+    suggestions.forEach((s) => {
+      if (s.name === e.currentTarget.innerText) {
+        setValue(type, s.id);
+        return;
+      }
     });
   };
 
-  onKeyDown = (e:any) => {
-    const { activeSuggestion, filteredSuggestions } = this.state;
+  onKeyDown = (e: any) => {
+    const { activeSuggestion, filteredSuggestions, showSuggestions } = this.state;
+    const { setValue, type } = this.props;
 
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && showSuggestions) {
       this.setState({
         activeSuggestion: 0,
         showSuggestions: false,
-        userInput: filteredSuggestions[activeSuggestion]
+        userInput: filteredSuggestions[activeSuggestion].name,
       });
-    } else if (e.keyCode === 38) {
-      if (activeSuggestion === 0) {
-        return;
-      }
-      this.setState({ activeSuggestion: activeSuggestion - 1 });
-    }
-    // User pressed the down arrow, increment the index
-    else if (e.keyCode === 40) {
-      if (activeSuggestion - 1 === filteredSuggestions.length) {
-        return;
-      }
-      this.setState({ activeSuggestion: activeSuggestion + 1 });
+      setValue(type, filteredSuggestions[activeSuggestion].id);
+    } else if (e.keyCode === 38 && activeSuggestion > 0) {
+      this.setState(
+        { activeSuggestion: activeSuggestion - 1 },
+        () =>
+          this.activeRef &&
+          this.activeRef.current &&
+          this.activeRef.current.scrollIntoView()
+      );
+    } else if (
+      e.keyCode === 40 &&
+      activeSuggestion < filteredSuggestions.length - 1
+    ) {
+      this.setState(
+        { activeSuggestion: activeSuggestion + 1 },
+        () =>
+          this.activeRef &&
+          this.activeRef.current &&
+          this.activeRef.current.scrollIntoView()
+      );
     }
   };
 
@@ -83,51 +116,61 @@ export default class Autocomplete extends Component<Props, State> {
         activeSuggestion,
         filteredSuggestions,
         showSuggestions,
-        userInput
-      }
+        userInput,
+      },
     } = this;
 
     let suggestionsListComponent;
 
     if (showSuggestions && userInput) {
-        if (filteredSuggestions.length) {
-          suggestionsListComponent = (
-            <ul className={styles.suggestions}>
-              {filteredSuggestions.map((suggestion, index) => {
-                let className;
-  
-                // Flag the active suggestion with a class
-                if (index === activeSuggestion) {
-                  className = styles.suggestion_active;
-                }
+      if (filteredSuggestions.length) {
+        suggestionsListComponent = (
+          <ul className={styles.suggestions}>
+            {filteredSuggestions.map((suggestion, index) => {
+              if (index === activeSuggestion) {
                 return (
-                  <li className={className} key={suggestion} onClick={onClick}>
-                    {suggestion}
+                  <li
+                    ref={this.activeRef}
+                    className={styles.suggestion_active}
+                    key={suggestion.id}
+                    onClick={onClick}
+                  >
+                    {suggestion.name}
                   </li>
                 );
-              })}
-            </ul>
-          );
-        } else {
-          suggestionsListComponent = (
-            <div className={styles.no_suggestions}>
-              <em>No suggestions available.</em>
-            </div>
-          );
-        }
+              }
+              return (
+                <li
+                  className={styles.suggestion}
+                  key={suggestion.id}
+                  onClick={onClick}
+                >
+                  {suggestion.name}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      } else {
+        suggestionsListComponent = (
+          <div className={styles.no_suggestions}>
+            <em>No suggestions available.</em>
+          </div>
+        );
       }
-      return (
-        <Fragment>
-          <input
-            className={styles.input}
-            type="text"
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            value={userInput}
-            placeholder={this.props.placeholder}
-          />
-          {suggestionsListComponent}
-        </Fragment>
-      );
     }
+    return (
+      <div style={{ position: "relative" }}>
+        <input
+          className={styles.input}
+          type="text"
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          value={userInput}
+          placeholder={this.props.placeholder}
+        />
+        {suggestionsListComponent}
+      </div>
+    );
+  }
 }

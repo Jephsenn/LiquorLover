@@ -1,38 +1,45 @@
 .no_suggestions {
-color: #999;
-padding: 0.5rem;
+  color: #999;
+  padding: 0;
 }
 
 .input {
-    width: calc(300px + 1rem);
-    max-height: 143px;
-    font-size: 32px;
-    margin: 1rem 0 0 0;
+  width: 300px;
+  font-size: 24px;
+  margin: 16px;
+  padding: 8px;
+  position: relative;
+  border: 2px solid #222222;
 }
 
 .suggestions {
-border: 1px solid #999;
-border-top-width: 0;
-list-style: none;
-margin-top: 0;
-max-height: 143px;
-overflow-y: auto;
-padding-left: 0;
-width: calc(300px + 1rem);
+  border: 2px solid #222222;
+  border-top-width: 0;
+  list-style: none;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 300px;
+  position: absolute;
+  top: 64px;
+  left: 16px;
 }
 
 .suggestions li {
-padding: 0.5rem;
+  padding: 8px;
 }
 
-.suggestion_active,
-.suggestions li:hover {
-background-color: #008f68;
-color: #fae042;
-cursor: pointer;
-font-weight: 700;
+.suggestion {
+  background-color: white;
+  cursor: pointer;
+}
+
+.suggestion_active {
+  background-color: #002f47;
+  color: #fae042;
+  cursor: pointer;
+  font-weight: 700;
 }
 
 .suggestions li:not(:last-of-type) {
-border-bottom: 1px solid #999;
+  border-bottom: 1px solid #999;
 }
