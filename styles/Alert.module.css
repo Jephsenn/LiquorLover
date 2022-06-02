@@ -1,0 +1,22 @@
+.alert_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 300px;
+    padding: 16px 0;
+    border-radius: 20px;
+}
+
+.text {
+    text-align: center;
+    padding-left: 16px;
+}
+
+.close_button {
+    padding-right: 16px;
+}
+
+.close_button:hover{
+    cursor: pointer;
+    color:white
+}

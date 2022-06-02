@@ -11,6 +11,7 @@ import { ChangeEvent, Component } from "react";
 import Layout from "../src/components/layout";
 import styles from "../styles/Add.module.css";
 import Autocomplete, { AutocompleteItem } from "../src/components/autocomplete";
+import Alert, { AlertType } from "../src/components/alert";
 
 type Props = {
   drinks: AutocompleteItem[];
@@ -23,6 +24,10 @@ type State = {
   rating: number;
   hover: number;
   canSubmit: boolean;
+  drinkInput: string;
+  locationInput: string;
+  alertText: string;
+  alertType: AlertType;
 };
 
 export async function getServerSideProps(context: GetServerSideProps) {
@@ -57,6 +62,10 @@ export default class Add extends Component<Props, State> {
       rating: 0,
       hover: 0,
       canSubmit: false,
+      drinkInput: "",
+      locationInput: "",
+      alertText: "",
+      alertType: AlertType.Fail,
     };
   }
 
@@ -65,10 +74,12 @@ export default class Add extends Component<Props, State> {
     if (canSubmit) {
       axios
         .post("/api/add_drink", { locationId: location, drinkId: drink, rating })
-        .then(function (response) {
-          console.log(response);
+        .then( (response) => {
+          this.setState({locationInput: "", drinkInput: "", rating: 0})
+          this.setState({alertText: "You added the drink successfully!", alertType: AlertType.Success})
         })
-        .catch(function (error) {
+        .catch( (error) => {
+          this.setState({alertText: "There was a problem adding your drink", alertType: AlertType.Fail})
           console.log(error);
         });
     }
@@ -89,24 +100,29 @@ export default class Add extends Component<Props, State> {
   };
 
   render() {
-    const { rating, canSubmit } = this.state;
+    const { rating, canSubmit, locationInput, drinkInput, alertText, alertType } = this.state;
     const { locations, drinks } = this.props;
 
     return (
       <Layout page="add">
         <div className={styles.add}>
+        <Alert text={alertText} clearAlert={()=>this.setState({alertText: ""})} alertType={alertType}/>
           <div className={styles.add_form}>
             <Autocomplete
               suggestions={locations}
               placeholder="Location Name"
               type="location"
               setValue={this.setValue}
+              setUserInput={(s: string) => this.setState({locationInput: s})}
+              userInput={locationInput}
             />
             <Autocomplete
               suggestions={drinks}
               placeholder="Drink Name"
               type="drink"
               setValue={this.setValue}
+              setUserInput={(s: string) => this.setState({drinkInput: s})}
+              userInput={drinkInput}
             />
 
             <div className={styles.rating_container}>

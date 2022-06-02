@@ -6,13 +6,14 @@ type Props = {
   placeholder: string;
   setValue: Function;
   type: string;
+  userInput: string;
+  setUserInput: Function;
 };
 
 type State = {
   activeSuggestion: number;
   filteredSuggestions: AutocompleteItem[];
   showSuggestions: boolean;
-  userInput: string;
 };
 
 export type AutocompleteItem = {
@@ -29,7 +30,6 @@ export default class Autocomplete extends Component<Props, State> {
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      userInput: "",
     };
 
     this.activeRef = React.createRef();
@@ -49,10 +49,12 @@ export default class Autocomplete extends Component<Props, State> {
         activeSuggestion: 0,
         filteredSuggestions,
         showSuggestions: true,
-        userInput: e.currentTarget.value,
-      });
+     });
+    this.props.setUserInput(e.currentTarget.value);
+
     } else {
-      this.setState({ showSuggestions: false });
+      this.setState({ showSuggestions: false});
+      this.props.setUserInput("");
     }
   };
 
@@ -63,8 +65,8 @@ export default class Autocomplete extends Component<Props, State> {
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      userInput: e.currentTarget.innerText,
     });
+    this.props.setUserInput(e.currentTarget.innerText);
 
     suggestions.forEach((s) => {
       if (s.name === e.currentTarget.innerText) {
@@ -82,8 +84,8 @@ export default class Autocomplete extends Component<Props, State> {
       this.setState({
         activeSuggestion: 0,
         showSuggestions: false,
-        userInput: filteredSuggestions[activeSuggestion].name,
       });
+      this.props.setUserInput(filteredSuggestions[activeSuggestion].name);
       setValue(type, filteredSuggestions[activeSuggestion].id);
     } else if (e.keyCode === 38 && activeSuggestion > 0) {
       this.setState(
@@ -112,11 +114,13 @@ export default class Autocomplete extends Component<Props, State> {
       onChange,
       onClick,
       onKeyDown,
+      props: {
+        userInput
+      },
       state: {
         activeSuggestion,
         filteredSuggestions,
         showSuggestions,
-        userInput,
       },
     } = this;
 

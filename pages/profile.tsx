@@ -52,9 +52,8 @@ export default function Profile(props: Props) {
   return (
     <Layout page="profile">
       <div className={styles.profile}>
-        <div className={styles.top_bar}>
+        
           <p className={styles.welcome_text}> Welcome back, {props.name} </p>
-        </div>
 
         <div className={styles.past_drinks}>
           <p className={styles.past_label}> Past Drinks </p>

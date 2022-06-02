@@ -7,10 +7,6 @@
   align-items: center;
 }
 
-.add_form {
-  
-}
-
 .star_full {
   margin: 4px;
   width: 40px;
@@ -25,6 +21,7 @@
 
 .star_empty:hover {
   color: #f4e285;
+  cursor: pointer;
 }
 
 .rating_container {
